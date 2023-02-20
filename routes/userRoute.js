@@ -16,7 +16,7 @@ router.get("/", (req, res) => {
 
 router.get("/:id", (req, res) => {
     try{
-        connection.query(`select * from users where userID = ?`, (err, result) => {
+        connection.query(`select * from users where userID = ?`,[req.params.id] , (err, result) => {
             if(err) throw err;
             res.send(result);
         });
@@ -24,6 +24,6 @@ router.get("/:id", (req, res) => {
         console.log(error);
         res.status(400).send(error)
     }
-})
+});
 
 module.exports = router;
